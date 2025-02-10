@@ -44,13 +44,15 @@ class Motorbike extends Vehicle{
 
     if (this.wheels.length !== 2) {
       this.wheels = [new Wheel(), new Wheel()];
+    } else {
+      this.wheels = wheels;
     }
   }
 
   // TODO: Implement the wheelie method
     // TODO: The method should log the message "Motorbike [make] [model] is doing a wheelie!"
 
-  wheelie() {
+  wheelie(): void {
     console.log(`Motorbike ${this.make} ${this.model} is doing a wheelie!`);
   }
 
@@ -68,9 +70,8 @@ class Motorbike extends Vehicle{
     console.log(`Weight: ${this.weight}`);
     console.log(`Top Speed: ${this.topSpeed}`);
     console.log(`Color: ${this.color}`);
-    console.log(`Wheels: ${this.wheels.length}`);
+    console.log(`Wheels: ${this.wheels}`);
   }
-
 }
 
 // Export the Motorbike class as the default export

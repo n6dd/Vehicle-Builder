@@ -36,7 +36,11 @@ class Truck extends Vehicle implements AbleToTow {
     this.topSpeed = topSpeed;
 
     if (wheels.length !== 4) {
-      this.wheels = [ new Wheel(18, "Michelin"), new Wheel(18, "Michelin"), new Wheel(18, "Michelin"), new Wheel(18, "Michelin") ];
+      this.wheels = [
+        new Wheel,
+        new Wheel,
+        new Wheel,
+        new Wheel ];
     } else {
       this.wheels = wheels;
     } 
@@ -47,14 +51,13 @@ class Truck extends Vehicle implements AbleToTow {
   // TODO: Implement the tow method from the AbleToTow interface
   tow(vehicle: Truck | Motorbike | Car): void {
     // TODO: Get the make an model of the vehicle if it exists
-    const vehicleMakeAndModel = `${vehicle.make} ${vehicle.model}`;
     if (vehicle.weight <= this.towingCapacity) {
     // TODO: Check if the vehicle's weight is less than or equal to the truck's towing capacity
     // TODO: If it is, log that the vehicle is being towed
     // TODO: If it is not, log that the vehicle is too heavy to be towed
-      console.log(`${vehicleMakeAndModel} is being towed by ${this.make} ${this.model}`);
+      console.log(`${vehicle.make} ${vehicle.model} is being towed by ${this.make} ${this.model}`);
     } else {
-      console.log(`${vehicleMakeAndModel} is too heavy to be towed by ${this.make} ${this.model}`);
+      console.log(`${vehicle.make} ${vehicle.model} is too heavy to be towed by ${this.make} ${this.model}`);
     }
   }
 
@@ -71,20 +74,8 @@ class Truck extends Vehicle implements AbleToTow {
     console.log(`Weight: ${this.weight}`);
     console.log(`Top Speed: ${this.topSpeed}`);
     console.log(`Color: ${this.color}`);
-    console.log(`Towing Capacity: ${this.towingCapacity} kg`);
-
-    console.log(
-      `Wheel 1: ${this.wheels[0].getDiameter} inch ${this.wheels[0].getTireBrand}`
-    );
-    console.log(
-      `Wheel 2: ${this.wheels[1].getDiameter} inch ${this.wheels[1].getTireBrand}`
-    );
-    console.log(
-      `Wheel 3: ${this.wheels[2].getDiameter} inch ${this.wheels[2].getTireBrand}`
-    );
-    console.log(
-      `Wheel 4: ${this.wheels[3].getDiameter} inch ${this.wheels[3].getTireBrand}`
-    );
+    console.log(`Towing Capacity: ${this.towingCapacity} lbs`);
+    console.log(`Wheels: ${this.wheels.length} wheels`);
   };
 }
 
