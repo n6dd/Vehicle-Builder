@@ -189,8 +189,11 @@ class Cli {
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
           [],
-          parseInt(answers.towingCapacity),
+          answers.towingCapacity,
         );
+        this.vehicles.push(truck);
+        this.selectedVehicleVin = truck.vin;
+        this.performActions();
       });
   }
 
@@ -294,12 +297,12 @@ class Cli {
         // TODO: check if the selected vehicle is the truck
         // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
         // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
-        const vehicleToTow = answers.vehicleToTow;
-        if (vehicleToTow.vin === truck.vin) {
+        
+        if (answers.vehicleToTow === truck) {
           console.log("A truck can't tow itself");
           this.performActions();
         } else {
-          truck.tow(vehicleToTow);
+          truck.tow(answers.vehicleToTow);
           this.performActions();
         }
       });
@@ -391,22 +394,24 @@ class Cli {
         }
         // TODO: add statements to perform the tow action only if the selected vehicle is a truck. Call the findVehicleToTow method to find a vehicle to tow and pass the selected truck as an argument. After calling the findVehicleToTow method, you will need to return to avoid instantly calling the performActions method again since findVehicleToTow is asynchronous.
         // TODO: add statements to perform the wheelie action only if the selected vehicle is a motorbike
-        else if (answers.action === 'Tow a vehicle') {
+        else if (answers.action === 'Tow') {
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
-              if (this.vehicles[i] instanceof Truck) {
-                this.findVehicleToTow(this.vehicles[i] as Truck);
+              const selectedTruck = this.vehicles[i];
+              if (selectedTruck instanceof Truck) {
+                this.findVehicleToTow(selectedTruck);
                 return;
               } else {
                 console.log('Only trucks can tow vehicles');
                 }
               }
             }
-          } else if (answers.action === 'Do a wheelie') {
+          } else if (answers.action === 'Wheelie') {
             for (let i = 0; i < this.vehicles.length; i++) {
               if (this.vehicles[i].vin === this.selectedVehicleVin) {
-                if (this.vehicles[i] instanceof Motorbike) {
-                  (this.vehicles[i] as Motorbike).wheelie();
+                const selectedMotorbike = this.vehicles[i];
+                if (selectedMotorbike instanceof Motorbike) {
+                  selectedMotorbike.wheelie();
                 } else {
                   console.log('Only motorbikes can do wheelies');
                 }
